@@ -14,7 +14,8 @@ import org.json.simple.parser.ParseException;
 public class Main {
 	public static void main(String[] args) throws IOException, ParseException {
 		JSONArray jsonArray = getJsonArray();
-		parsing(jsonArray);
+		List<Bread> breads = parsing(jsonArray);
+		print(breads);
 	}
 
 	private static JSONArray getJsonArray() throws IOException, ParseException {
@@ -45,5 +46,16 @@ public class Main {
 			breads.add(Bread.of(breadType, recipes));
 		}
 		return breads;
+	}
+
+	private static void print(List<Bread> breads) {
+		for (Bread bread : breads) {
+			System.out.println("breadType: " + bread.getBreadType());
+			System.out.println("recipe");
+			for (Recipe recipe : bread.getRecipe()) {
+				System.out.println(recipe.getIngredient() + ": " + recipe.getAmount());
+			}
+			System.out.println();
+		}
 	}
 }
